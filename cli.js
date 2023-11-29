@@ -1,11 +1,8 @@
 
-const { soma, markdownLinks } = require('./index.js');
-const chalk = require('chalk');
-const resultado = soma(1, 3);
+// const { markdownLinks } = require('./index.js');
+// const chalk = require('chalk');
 
-console.log(chalk.bgCyan('A soma é:'), chalk.magenta(resultado));
-
-markdownLinks ('./README.md')
-.then((conteudoArquivo) => {
-    console.log(chalk.bgYellow(conteudoArquivo))
-});
+// markdownLinks ('./README.md')
+// .then((conteudoArquivo) => {
+//     console.log(chalk.bgYellow(conteudoArquivo))
+// });
