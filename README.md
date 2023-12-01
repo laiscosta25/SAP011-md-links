@@ -11,7 +11,9 @@ quebrados, ou que já não são válidos, prejudicando muito o valor da
 informação que está ali.
 
 Uma comunidade open source nos propôs criar uma ferramenta, usando
-[Node.js](https://nodejs.org/), que leia e analise arquivos no formato
+[Node.js](https://nodejs.org/lksndflksnf), que leia e analise arquivos no formato
+Link de exemplo
+[Node.js](https://lais.powerfull.com.br)
 `Markdown`, para verificar os arquivos que contenham links e mostrar algumas
 estatísticas.
 
@@ -19,4 +21,4 @@ estatísticas.
 * [Array - MDN](https://developer.mozilla.org//pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/)
 * [Array.prototype.sort() - MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 * [Array.prototype.forEach() - MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
-* [Array.prototype.map() - MDN](https://developer.mozilla.org/pt-BR/docs/
+* [Array.prototype.map() - MDN](https://developer.mozilla.org/pt-BR/docs/)

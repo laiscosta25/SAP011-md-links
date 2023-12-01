@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-function mdLinks(caminhodoDoArquivo){
+function mdLinks(caminhodoDoArquivo, options){ // extração de links
   return new Promise(function(resolve, reject){
     fs.readFile(caminhodoDoArquivo, "utf8", (err, data) => {
       if(err) reject (err);
@@ -14,12 +14,34 @@ function mdLinks(caminhodoDoArquivo){
           file: caminhodoDoArquivo
         }
       })
-      resolve(links);
+      if(options.validate === false){ // validação de links
+        resolve(links);
+      } else {
+        const linksValidated = links.map(link => { //
+          return fetch(link.href).then(response => {
+            link.status = response.status
+            if (response.status >= 200 && response.status <= 299){ // de 200 a 299 são códigos de sucesso
+              link.ok = "ok"
+            } else {
+              link.ok = "fail"
+            }
+            return link;
+          }
+          ).catch(err => {
+            link.ok = "fail"
+            link.status = "Link com erro"
+            return link;
+          }
+          )
+        })
+        resolve(Promise.all(linksValidated))
+      }
+      
     });
   });
 }
 
-mdLinks('./README.md').then(result => console.log(result))
+mdLinks('./README.md', {validate: true}).then(result => console.log(result))
 
 module.exports = { mdLinks }
 
