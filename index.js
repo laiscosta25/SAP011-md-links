@@ -2,11 +2,14 @@ const fs = require("fs");
 
 function mdLinks(caminhodoDoArquivo, options){ // extração de links
   return new Promise(function(resolve, reject){
-    fs.readFile(caminhodoDoArquivo, "utf8", (err, data) => {
-      if(err) reject (err);
+    fs.readFile(caminhodoDoArquivo, "utf8", (err, data) => { //leitura de arquivos
+      if(err) reject (err); // rejeita caso tiver um erro
 
-      const pattern = /\[([^\]]+)\]\((https?[^)]+)\)/g; // expressão regular que é usada para busca por padrões como [texto](URL), onde texto é qualquer texto entre colchetes e URL é uma URL que começa com http ou https 
+      const pattern = /\[([^\]]+)\]\((https?[^)]+)\)/g; // expressão regular que é usada para busca por padrões como [texto](URL).
       const matches = [...data.matchAll(pattern)];
+      if(matches.length < 1) {
+        reject("Arquivo não possui links.")
+      }
       const links = matches.map(match => {
         return {
           href: match[2],
@@ -14,7 +17,7 @@ function mdLinks(caminhodoDoArquivo, options){ // extração de links
           file: caminhodoDoArquivo
         }
       })
-      if(options.validate === false){ // validação de links
+      if(options.validate === false){ // verificar se a pessoa quer fazer a validação de links
         resolve(links);
       } else {
         const linksValidated = links.map(link => { //
@@ -41,7 +44,7 @@ function mdLinks(caminhodoDoArquivo, options){ // extração de links
   });
 }
 
-mdLinks('./README.md', {validate: true}).then(result => console.log(result))
+// mdLinks('./README.md', {validate: true}).then(result => console.log(result))
 
 module.exports = { mdLinks }
 

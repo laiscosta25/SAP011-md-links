@@ -3,28 +3,9 @@ const { mdLinks } = require('./index.js');
 const chalk = require('chalk');
 
 const caminhoArquivo = process.argv[2];
-const validateOptionIndex = process.argv.indexOf('--validate'); //Obtém o índice da opção --validate nos argumentos da linha de comando.
-
+console.log(caminhoArquivo)
 const options = {
-    validate: validateOptionIndex !== -1 //Cria um objeto options que contém a opção validate com base na presença da opção --validate
+    validate: process.argv.includes("--validate") // verifica se '--validate' está incluído
 };
 
-mdLinks(caminhoArquivo, options).then((conteudoArquivo) => {
-    if(options.validate) {
-        return mdLinks(conteudoArquivo).then(() => {
-            for(const link of conteudoArquivo) {
-                console.log(
-                    chalk.bgPink.bold(link.text) +
-                    chalk.white.bold(' URL: ') +
-                    chalk.gray(link.href) +
-                    (link.ok ? chalk.green('☑ OK ') : chalk.red('☒ FAIL ')) +
-                    chalk.white.bold(' Status: ') +
-                    chalk.dim(link.status)
-                );
-            }
-        })
-    }
-})
-.catch((err) => {
-    console.error(chalk.red('Erro', err));
-});
+mdLinks(caminhoArquivo, options).then(result => console.log(result)).catch(result => console.log(result)) // printa no terminal.
